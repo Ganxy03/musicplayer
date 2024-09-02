@@ -60,17 +60,17 @@ export default {
             return name.substring(0, 6) + '...';
         },
         searchSongs() {
-            // axios.post('http://8.130.131.37:3000/search', {
-            //     keywords: this.searchKey,
-            //     limit: 30
-            // })
+            axios.post('http://8.130.131.37:3000/search', {
+                keywords: this.searchKey,
+                limit: 30
+            })
             
             console.log('搜索')
-            const timestamp = Date.now().getTime();
-            axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${timestamp}`)
-            .then(res => {
-                this.resulr = res.data.result.songs;
-            })
+            // const timestamp = Date.now().getTime();
+            // axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${timestamp}`)
+            // .then(res => {
+            //     this.resulr = res.data.result.songs;
+            // })
         },
         getSongLrc(id) {
             axios.post('http://8.130.131.37:3000/lyric?id=' + id)
