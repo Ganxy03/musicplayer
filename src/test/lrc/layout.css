@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+}
+.container {
+    height: calc(100vh - 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.controls {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 80%;
+    margin: 0 auto;
+    background-color: cadetblue;
+    position: relative;
+}
+.playPause {
+    background-color: brown;
+    text-align: center;
+}
+.progressBar {
+    flex: 1;
+    background-color: burlywood;
+    text-align: center;
+}
+.listBtn {
+    background-color: blueviolet;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        height: calc(100vh - 64px);
+    }
+    .controls {
+        flex-wrap: wrap;
+        width: 96%;
+    }
+    .progressBar {
+        width: 100%;
+        flex: none;
+        position: absolute;
+        top: 0;
+    }
+    .playPause {
+        width: 220px;
+        position: absolute;
+        top: 24px;
+        left: calc((100% - 220px) / 2);
+        z-index: 2;
+    }
+    .listBtn {
+        position: absolute;
+        top: 24px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        background-color: transparent;
+        z-index: 1;
+    }
+    .voice {
+        display: none;
+    }
+}

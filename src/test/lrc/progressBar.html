@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可拖动的进度条</title>
+    <style>
+        .progress-bar-container {
+            width: 60%;
+            position: relative;
+            background-color: #eee;
+            height: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .progress-bar {
+            width: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #4caf50;
+            border-radius: 10px;
+            transition: width 0.6s;
+            max-width: 100%;
+        }
+
+        .progress-handle {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border: 2px solid #4caf50;
+            transition: left 0.6s ease;
+            border-radius: 50%;
+            cursor: grab;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-handle" id="progressHandle"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var progressBar = document.getElementById('progressBar');
+            var progressHandle = document.getElementById('progressHandle');
+            var progressBarContainer = document.querySelector('.progress-bar-container');
+            var isDragging = false;
+            var progressBarWidth = progressBarContainer.offsetWidth;
+            var handlePosition = 5;
+
+            progressBarContainer.addEventListener('click', function(e) {
+                var clickX = e.pageX - progressBarContainer.offsetLeft;
+                updateHandlePosition(clickX);
+                updateProgressBarWidth(clickX);
+            });
+
+            progressHandle.addEventListener('mousedown', function() {
+                isDragging = true;
+                handlePosition = progressHandle.offsetLeft;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    var newHandleX = e.pageX - progressBarContainer.offsetLeft;
+                    updateHandlePosition(newHandleX);
+                    updateProgressBarWidth(newHandleX);
+                }
+            });
+
+            document.addEventListener('mouseup', function() {
+                isDragging = false;
+            });
+
+            function updateHandlePosition(newHandleX) {
+                var newPosition = Math.max(0, Math.min(newHandleX, progressBarWidth));
+                progressHandle.style.left = newPosition + 'px';
+                handlePosition = newPosition;
+            }
+
+            function updateProgressBarWidth(newHandleX) {
+                var newWidth = (newHandleX / progressBarWidth) * 100 ;
+                progressBar.style.width = newWidth + '%';
+            }
+        });
+    </script>
+</body>
+</html>

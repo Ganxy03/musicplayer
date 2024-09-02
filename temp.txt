@@ -1,0 +1,197 @@
+<template>
+    <div class="home-bac">
+
+        <span v-if="palyList">站点歌单内有 {{ palyList.length }} 首歌曲</span>
+        <br><br>
+
+        本歌单id {{ listId }}
+        
+        <!-- 这里有 {{ listDetail.length }} 首 -->
+        <h4>歌单信息</h4>
+        <!-- <pre>{{ palyList }}</pre> -->
+
+        <h4>歌曲信息</h4>
+        <pre>{{ audio }}</pre>
+
+        <h4>audio 信息</h4>
+        <pre>{{ temp }}</pre>
+
+        <br><br>
+
+
+        <!-- <pre>
+            {{ audio[0].url }}
+        </pre> -->
+
+        {{ audio[0].url }}
+
+        <audio src="http://m701.music.126.net/20240817221556/e4332f448a1f70fd6dd3674ea7c73f7f/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34825790377/2716/354c/9ba2/50d2d8322c2c9ea864a39619a35bad2e.mp3" controls ></audio>
+
+        http://m701.music.126.net/20240817235537/c1bf1d967ef72965a5e37b4d3b93828a/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34825790377/2716/354c/9ba2/50d2d8322c2c9ea864a39619a35bad2e.mp3
+
+        <audio src="http://m701.music.126.net/20240817235537/c1bf1d967ef72965a5e37b4d3b93828a/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/34825790377/2716/354c/9ba2/50d2d8322c2c9ea864a39619a35bad2e.mp3" controls ></audio>
+
+        <div class="audio" id="aplayer"></div>
+
+    </div>
+</template>
+
+<script>
+import 'aplayer/dist/APlayer.min.css';
+import APlayer from 'aplayer';
+import axios from 'axios';
+
+export default {
+    data() {
+        return {
+            listId: '',
+            playList: {},
+            temp: [],
+            apOption: {
+                fixed: false,
+                listFolded: true,
+                autoplay: true,
+                preload: "auto",
+                loop: "all",
+                order: "list",
+            },
+            audio: []
+        }
+    },
+    mounted() {
+        this.getList()
+    },
+    methods: {
+        initPlayer() {
+            // eslint-disable-next-line
+            const ap = new APlayer({
+                container: document.getElementById("aplayer"),
+                audio: this.temp,
+                ...this.apOption
+            });
+        },
+        // 获取歌单id
+        getList() {
+            axios({
+                url: `/api/user/playlist?uid=12318082694`,
+                method: 'get',
+            })
+            .then(res => {
+                // console.log(res.data.playlist[0])
+                this.listId = res.data.playlist[0].id
+                // this.setUp(this.listId)
+            })
+        },
+
+
+
+        
+        // async setUp(id) {
+        //     await this.getSongs(id);
+        //     this.combine(); 
+        // },
+        // // 获取歌单歌曲
+        // getSongs(id) {
+        //     axios({
+        //         url: `/api/playlist/detail?id=${id}`,
+        //         method: 'get',
+        //     })
+        //     .then(res => {
+        //         // console.log(res.data)
+
+        //         if(res.data == null) {
+        //             console.log('没有歌单')
+        //             return
+        //         }
+
+        //         const { id, playCount, tracks } = res.data.playlist
+                
+        //         this.palyList = {
+        //             id: id,
+        //             playCount: playCount,
+        //             // tracks: tracks,
+        //             tracks: tracks.map(track => ({
+        //                 songId: track.id,
+        //                 name: track.name,
+        //                 artist: track.ar[0].name,
+        //                 picUrl: track.al.picUrl,
+        //             })),
+        //         }
+
+        //         const songIds =  this.palyList.tracks.map(item => ({
+        //             id: item.songId,
+        //         }))
+
+        //         songIds.forEach(item => {
+        //             axios({
+        //                 url: `/api/song/url/v1?id=${item.id}&level=exhigh`,
+        //                 method: 'get',
+        //             })
+        //             .then(res => {
+        //                 this.audio.push(res.data.data[0])
+        //                 // this.palyList.push(res.data.data[0])
+        //                 this.audio = this.audio.map(item => ({
+        //                     id: item.id,
+        //                     url: item.url,
+        //                     size: item.size,
+        //                     type: item.type,
+        //                     level: item.level
+        //                 }))
+        //             })
+        //         });
+        //     });
+            
+        //     // this.combine()
+        // },
+
+        // combine() {
+
+        //     // this.temp = this.playList.tracks.map(item => {
+        //     //     return item
+        //     // })
+
+        //     // this.playList.tracks.forEach(item => {
+        //     //     console.log(item[0])
+        //     // });
+        //     console.log(this.palyList)
+
+        //     this.temp = this.palyList
+
+
+        //     // this.temp = this.temp.map(item => {
+        //     //     return {
+        //     //         name: item.name,
+        //     //         artist: item.artist,
+        //     //         url: item.url,
+        //     //         cover: item.picUrl,
+        //     //     }
+        //     // });
+
+            
+            
+        //     // this.initPlayer();
+        // }
+    }
+}
+</script>
+
+<style>
+.home-bac {
+    background: url(./img/bg.svg) 50% no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    /* display: flex; */
+}
+
+.home-bac .audio {
+    width: 100%;
+    height: 66px;
+    align-items: center;
+    justify-content: center;
+
+}
+</style>
+
+
+

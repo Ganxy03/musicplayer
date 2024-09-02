@@ -1,0 +1,314 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+
+.contain {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: #aa4b6b;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: url(../img/bg.svg) 50% no-repeat;
+}
+.contain .playList {
+    height: 420px;
+    width: 240px;
+    overflow-y: scroll;
+}
+
+/* 设置滚动条样式 */
+.contain .playList::-webkit-scrollbar {
+    width: 6px; /* 滚动条宽度 */
+}
+
+/* 设置滚动条轨道样式 */
+.contain .playList::-webkit-scrollbar-track {
+    background-color: transparent
+}
+
+/* 设置滚动条滑块样式 */
+.contain .playList::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3); /* 滑块背景颜色 */
+    border-radius: 5px; /* 滑块圆角 */
+}
+
+/* 鼠标悬停在滚动条滑块上时的样式 */
+.contain .playList::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.6); /* 滑块悬停时的背景颜色 */
+}
+
+audio {
+    width: 50%;
+    height: 50px;
+    position: fixed;
+    bottom: 24px;
+}
+.box {
+    height: 420px;
+    text-align: center;
+    color: #f6f6f6;
+    width: 480px;
+    
+    /* 超出隐藏 */
+    /* overflow: hidden; */
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* 设置滚动条样式 */
+.box::-webkit-scrollbar {
+    width: 6px; /* 滚动条宽度 */
+}
+
+/* 设置滚动条轨道样式 */
+.box::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.2); /* 轨道背景颜色 */
+}
+
+/* 设置滚动条滑块样式 */
+.box::-webkit-scrollbar-thumb {
+    background-color: #fff; /* 滑块背景颜色 */
+    border-radius: 5px; /* 滑块圆角 */
+}
+
+/* 鼠标悬停在滚动条滑块上时的样式 */
+.box::-webkit-scrollbar-thumb:hover {
+    background-color: #a1a1a1; /* 滑块悬停时的背景颜色 */
+}
+ul {
+    width: 100%;
+    transition: .6s;
+} 
+
+li{
+    height: 30px;
+    line-height: 30px;
+    transition: 0.2s;
+}
+
+.play-time-inner {
+    display: flex;
+    justify-content: space-between;
+    width: calc(1060px - 120px - 132px);
+    margin: 0 auto;
+    height: 12px;
+    line-height: 12px;
+    color: #FFFFFF88;
+
+    position: absolute;
+    left: calc((100% - (1060px - 120px - 132px)) / 2);
+    bottom: 70px;
+    /* display: none; */
+}
+
+.play-control-btn {
+    height: 48px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background: -webkit-linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3b8d99, #6b6b83, #aa4b6b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: url(../img/bg.svg) 50% no-repeat;
+}
+.player-controller {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1060px;
+    margin: 12px auto;
+    flex-wrap: nowrap; */
+    display: flex;
+    flex-wrap: nowrap;
+    width: 1060px;
+    margin: 0 auto;
+    /* background-color: cadetblue; */
+    position: relative;
+    height: 120px;
+}
+.playPause {
+    /* background-color: brown; */
+    text-align: center;
+}
+#play-btn, #pause-btn {
+    transform: scale(1.3);
+}
+#previous-btn, #next-btn {
+    transform: scale(0.7);
+}
+#next-btn {
+    transform: rotate(180deg) scale(0.7);
+}
+
+.play-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* 让play-bar-wrap占据剩余空间 */
+    /* background-color: burlywood; */
+    text-align: center; /* 使play-bar-wrap内的内容水平居中 */
+    height: 16px; /* 保持高度一致 */
+    position: relative;
+    height: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.progress-bar {
+    width: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.6s;
+    max-width: 100%;
+}
+
+.progress-handle {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    /* border: 2px solid #4caf50; */
+    border: 8px solid #fff;
+    transition: left 0.6s ease;
+    border-radius: 50%;
+    cursor: grab;
+}
+.playModeBtn {
+    /* background-color: blueviolet; */
+}
+.voiceBtn {
+    margin-left: 12px;
+}
+.moreMenu {
+    display: none;
+}
+.play-control-btn {
+    height: 100px;
+    display: flex;
+    justify-content: space-between; /* 使按钮两端对齐 */
+    align-items: center; /* 垂直居中 */
+    /* 根据需要设置宽度，或使用flex-grow来控制宽度 */
+    width: 1060px; /* 假设宽度，根据实际情况调整 */
+}
+
+svg {
+    text-align: center;
+}
+
+#progressBar {
+    width: 0%; /* 初始宽度为0% */
+    height: 8px;
+    /* background-color: #4caf50; 进度条颜色 */
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+
+
+.bottom-window {
+    width: 100%;
+    position: fixed;
+    bottom: 420px;
+    border-top: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out;
+    /* z-index: 2; */
+    overflow-y: auto;
+}
+
+.bottom-window.visible {
+    transform: translateY(0);
+}
+@media screen and (max-width: 1060px) {
+    .player-controller {
+        width: 96%;
+        flex-wrap: wrap;
+        flex: none;
+    }
+    .play-control-btn {
+        width: 98%;
+    }
+    .play-bar-wrap {
+        width: 96%;
+        flex: none;
+        position: absolute;
+        top: -24px;
+        left: 2%;
+    }
+    .play-time-inner {
+        width: 90%;
+        line-height: 42px;
+        color: #FFFFFF88;
+        bottom: 170px;
+        left: 5%;
+
+    }
+    .moreMenu {
+        display: flex;
+        position: absolute;
+        bottom: 170px;
+        right: 12px;
+    }
+    .playPause {
+        width: 220px;
+        position: absolute;
+        top: 32px;
+        left: calc((100% - 220px) / 2);
+        z-index: 2;
+    }
+    .playModeBtn {
+        position: absolute;
+        top: 24px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        z-index: 1;
+    }
+    .voiceBtn {
+        display: none;
+    }
+    .contain .playList {
+        display: none;
+    }
+
+    .contain .box {
+        width: 96%;
+    }
+
+}
+
+
+@media screen and (max-width: 768px) {
+    .box {
+        width: 96%;
+    }
+    audio {
+        width: 80%;
+    }
+}

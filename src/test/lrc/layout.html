@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./layout.css">
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center;">播放控制器</h2>
+        <div class="controls">
+            <span class="playPause">
+                <span>上一首</span>
+                <span id="play">播放</span>
+                <span>下一首</span>
+            </span>
+            <div class="progressBar">进度条</div>
+            <span class="listBtn">
+                <span class="voice">声音</span>
+                <span>播放模式</span>
+                <span>循环模式</span>
+            </span>
+            <script>
+                const play = document.getElementById('play')
+                play.onclick = function () {
+                    if (play.innerHTML === '播放') {
+                        play.innerHTML = '暂停'
+                    } else {
+                        play.innerHTML = '播放'
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
