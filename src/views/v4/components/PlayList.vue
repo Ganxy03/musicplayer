@@ -66,7 +66,7 @@ export default {
             // })
             
             console.log('搜索')
-            const timestamp = Date.now();
+            const timestamp = Date.now().getTime();
             axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${timestamp}`)
             .then(res => {
                 this.resulr = res.data.result.songs;
