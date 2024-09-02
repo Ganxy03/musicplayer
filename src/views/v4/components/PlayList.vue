@@ -64,6 +64,8 @@ export default {
             //     keywords: this.searchKey,
             //     limit: 30
             // })
+            
+            console.log('搜索')
             const timestamp = Date.now();
             axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${timestamp}`)
             .then(res => {
