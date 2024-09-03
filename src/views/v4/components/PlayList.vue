@@ -60,14 +60,19 @@ export default {
             return name.substring(0, 6) + '...';
         },
         searchSongs() {
-            axios.post('http://8.130.131.37:3000/search', {
-                keywords: this.searchKey,
-                limit: 30
-            })
+            // axios.post('http://8.130.131.37:3000/search', {
+            //     keywords: this.searchKey,
+            //     limit: 30
+            // })
             // axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${Date.now()}`)
             // .then(res => {
             //     this.resulr = res.data.result.songs;
             // })
+
+            axios.post(`http://8.130.131.37:3000/search?keywords=${this.searchKey}&limit=30&timestamp=${Date.now()}`)
+            .then(res => {
+                this.resulr = res.data.result.songs;
+            })
         },
         getSongLrc(id) {
             axios.post('http://8.130.131.37:3000/lyric?id=' + id)
