@@ -38,7 +38,7 @@ export default {
     methods: {
         playSong(id) {
             // console.log(id)
-            axios.post('https://163.ganxy03.cn//song/url/v1?id=' + id + '&level=exhigh')
+            axios.post('https://163.ganxy03.cn/song/url/v1?id=' + id + '&level=exhigh')
             .then(res => {
                 console.log(res)
                 if(res.data.staus == 400) {
@@ -69,13 +69,13 @@ export default {
             //     this.resulr = res.data.result.songs;
             // })
 
-            axios.post(`https://163.ganxy03.cn//search?keywords=${this.searchKey}&limit=30}`)
+            axios.post(`https://163.ganxy03.cn/search?keywords=${this.searchKey}&limit=30`)
             .then(res => {
                 this.resulr = res.data.result.songs;
             })
         },
         getSongLrc(id) {
-            axios.post('https://163.ganxy03.cn//lyric?id=' + id)
+            axios.post('https://163.ganxy03.cn/lyric?id=' + id)
             .then(res => {
                 this.songLrc = res.data.lrc.lyric
                 this.songLrc = this.filterData()
